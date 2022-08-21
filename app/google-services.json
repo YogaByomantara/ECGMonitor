@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "938677518071",
+    "firebase_url": "https://alat-monitoring-tekanan-darah.firebaseio.com",
+    "project_id": "alat-monitoring-tekanan-darah",
+    "storage_bucket": "alat-monitoring-tekanan-darah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938677518071:android:da5048d1384dd2938f1df2",
+        "android_client_info": {
+          "package_name": "com.example.ecgmonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938677518071-ohaqgq0a9bls5pri9budu9312amvl58b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuOrEvVweNLtpxEFBMpyoqSNYQLEZcu0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938677518071-ohaqgq0a9bls5pri9budu9312amvl58b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
