@@ -3,10 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.201" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.201" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.201" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.201" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.201" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.201" />
         <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_antares.xml" value="0.22" />
         <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_data.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_history.xml" value="0.1796875" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_onboardingkedua.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_onboardingpertama.xml" value="0.25" />
         <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/activity_splashscreen.xml" value="0.22" />
+        <entry key="..\:/Users/Public/ECGMonitor2/app/src/main/res/layout/person.xml" value="0.41359223300970877" />
       </map>
     </option>
   </component>

@@ -1,29 +1,28 @@
 package com.example.ecgmonitor;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     //Inisialisasi Tombol Untuk melihat data
-    MaterialButton register;
+//    MaterialButton register;
     private FirebaseAuth mAuth;
     TextView username, password;
+    TextView regischoose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         //Menempatkan tombol register terhadap nama yang telah di inisialisasi
-        register = findViewById(R.id.register);
-
+//        register = findViewById(R.id.register);
+        regischoose = findViewById(R.id.registerchoose);
         //Inisialisasi Tombol Login terhadap dokter
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
 
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        regischoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, data.class);

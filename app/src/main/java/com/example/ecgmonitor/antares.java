@@ -2,28 +2,25 @@ package com.example.ecgmonitor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import id.co.telkom.iot.AntaresHTTPAPI;
 import id.co.telkom.iot.AntaresResponse;
@@ -36,7 +33,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
     private String dataDevice;
     private ImageView history;
     private MaterialButton savedata;
-    User userData;
+//    User userData;
     FirebaseDatabase firebaseDatabase;
 
     DatabaseReference databaseReference;
@@ -45,7 +42,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_antares);
-        userData = new User();
+
         if (user != null) {
             String email = user.getEmail();
             userLogin = findViewById(R.id.textView2);
@@ -60,7 +57,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
         savedata = findViewById(R.id.simpanbtn);
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
-        antaresAPIHTTP.getLatestDataofDevice("cb4b71b76a78d7bd:20077e1680d237be","HeartMonitor","HeartMonitoring22");
+        antaresAPIHTTP.getLatestDataofDevice("1778f0e47e254be3:e264961148f12896","HeartMonitor2022","HeartMonitoring2022");
 
         history.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +70,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
         savedata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                antaresAPIHTTP.getLatestDataofDevice("cb4b71b76a78d7bd:20077e1680d237be", "HeartMonitor", "HeartMonitoring22");
-
+                addData(dataDevice);
             }
         });
 
@@ -88,7 +84,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                antaresAPIHTTP.getLatestDataofDevice("cb4b71b76a78d7bd:20077e1680d237be","HeartMonitor","HeartMonitoring22");
+                                antaresAPIHTTP.getLatestDataofDevice("1778f0e47e254be3:e264961148f12896","HeartMonitor2022","HeartMonitoring2022");
                             }
                         });
                     }
@@ -108,6 +104,7 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
             try {
                 JSONObject body = new JSONObject(antaresResponse.getBody());
                 dataDevice = body.getJSONObject("m2m:cin").getString("con");
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -127,33 +124,22 @@ public class antares extends AppCompatActivity implements AntaresHTTPAPI.OnRespo
         }
     }
 
-//    private void addData(String dataDevice) {
-//        userData.setRate(dataDevice);
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String key =  databaseReference.push().getKey();
-//                databaseReference.child(key).child("Hasil").setValue(userData);
-//
-//                // after adding this data we are showing toast message.
-//                Toast.makeText(antares.this, "Berhasil Menyimpan Data", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(antares.this,"Gagal Menyimpan Data" + error, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void addData(String dataDevice) {
+        String key = databaseReference.push().getKey();
+        databaseReference.child(key).child("Rate").setValue(dataDevice)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        antaresAPIHTTP.storeDataofDevice(1,"1778f0e47e254be3:e264961148f12896","HeartMonitor2022","DataRate", "{\\\"statuss\\\":\\\"$key\\\"}");
+                        Toast.makeText(antares.this, "Updated!", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(antares.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
-
-//    @Override
-//    protected void onResume() {
-////
-////        antaresAPIHTTP = new AntaresHTTPAPI();
-////        antaresAPIHTTP.addListener(this);
-//        antaresAPIHTTP.getLatestDataofDevice("cb4b7b76a78d7bd:20077e1680d237be", "HeartMonitor", "HeartMonitoring22");
-//        super.onResume();
-//    }
 }
